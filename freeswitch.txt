@@ -1,0 +1,19 @@
+0 freeswitch manul
+1)show the global var defined by configuration.
+freeswitch> global_getvar
+
+1 data storage and analysis of freeswitch
+1.1 data storage
+1.1.1 data source and interface
+1)core.db or sofia*.db: registrations table.
+interface:sqlite3
+2)cdr-csv: *.csv files.
+interface:java file stream
+3)voicemail.wav and recording.wav
+java stream.
+4)extentions -- undefined.
+1.1.2 sln on hadoop for off-line data storage
+-> HBase storages raw data 
+-> HAMA analyzies data with SQL 
+-> Mahout analyzes data in machine learning.
+
