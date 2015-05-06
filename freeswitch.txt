@@ -13,7 +13,7 @@ interface:java file stream
 java stream.
 4)extentions -- undefined.
 1.1.2 sln on hadoop for off-line data storage
--> HBase storages raw data 
--> HAMA analyzies data with SQL 
+-> HBase stores raw data 
+-> HAMA queries data with SQL 
 -> Mahout analyzes data in machine learning.
 
