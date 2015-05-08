@@ -3,4 +3,6 @@
 2)delete files recursively under HBASE_INSTALL_DIR/logs for each node.
 3)execute cmd 'hdfs namenode -format' in namenode.
 4)before starting the cluster, check and unify the NTP of the cluster.
+note: make sure that the time difference between datanode and namenode must less than 30000ms default.
+
 
