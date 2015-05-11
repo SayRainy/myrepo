@@ -5,4 +5,11 @@
 4)before starting the cluster, check and unify the NTP of the cluster.
 note: make sure that the time difference between datanode and namenode must less than 30000ms default.
 
-
+2. WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+1)bug:
+/home/hadoop/hadoop-2.6.0/lib/native/libhadoop.so.1.0.0: wrong ELF class: ELFCLASS64 (Possible cause: architecture word width mismatch)
+2)ana:
+my machione os is Ubuntu14.04 i686 while the native libraries under the hadoop-2.6.0 installed are based on 64bit. 
+3)sln:
+firstly, copy the origin .so based on 32bit from hadoop-2.6.0.tar.gz.
+secondly, build from source files.

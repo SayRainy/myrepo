@@ -17,6 +17,6 @@ HBase stores raw data.
 
 1.2 data analysis
 1.2.1 sln on hadoop for off-line data analysis
-1)HAMA processes data with SQL-like. 
-2)Mahout analyzes data in machine learning.
+1)Hive processes data with SQL-like. 
+2)Mahout analyzes data by machine learning.
 
