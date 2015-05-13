@@ -9,7 +9,11 @@ note: make sure that the time difference between datanode and namenode must less
 1)bug:
 /home/hadoop/hadoop-2.6.0/lib/native/libhadoop.so.1.0.0: wrong ELF class: ELFCLASS64 (Possible cause: architecture word width mismatch)
 2)ana:
-my machione os is Ubuntu14.04 i686 while the native libraries under the hadoop-2.6.0 installed are based on 64bit. 
+my machine os is Ubuntu14.04 i686 while the native libraries under the hadoop-2.6.0 installed are based on 64bit. 
 3)sln:
-firstly, copy the origin .so based on 32bit from hadoop-2.6.0.tar.gz.
-secondly, build from source files.
+fisrtly, export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native".
+secondly, build the hadoop native library from the hadoop src as the official doc.
+thirdly, rm lib*.so and relink lib*.so to lib*.so.*.0.0.
+
+3. show the hadoop cmd log in bash.
+export HADOOP_ROOT_LOGGER=debug,console
