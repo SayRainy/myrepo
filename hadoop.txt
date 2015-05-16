@@ -17,3 +17,20 @@ thirdly, link lib*.so to lib*.so.*.0.0 if not.
 
 3. show the hadoop cmd log in bash.
 export HADOOP_ROOT_LOGGER=debug,console
+
+4. job failed.
+1)log
+ INFO mapreduce.Job: Task Id : attempt_1431738106474_0002_m_000001_2, Status : FAILED
+Container [pid=9484,containerID=container_1431738106474_0002_01_000007] is running beyond virtual memory limits. Current usage: 205.6 MB of 1 GB physical memory used; 2.1 GB of 2.1 GB virtual memory used. Killing container.
+2)sln
+       </property>
+	       <property>
+               <name>yarn.nodemanager.vmem-check-enabled</name>
+               <value>false</value>
+       </property>
+append this entry to yarn-site.xml
+
+5. HMaster shutdown when execute start-hbase.sh cmd
+ZooKeeper architecture is 1+x, which means 1 HMaster plus x>=2*n + 1(n is the broken machine number.)
+thus the tolerance of the cluter is n. 
+e.g.  1+4 cluster only can brokendown 1 node or being shutdown.
