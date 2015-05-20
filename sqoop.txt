@@ -1,0 +1,5 @@
+1. install mysql's jdbc as jar under {$SQOOP_HOME/lib}
+2. comment the attribute, bind-address so that mysql can start on 0.0.0.0 and listen to all host on the local machine. and the hadoop@namenode user can access to mysql server.
+3. for the sake of datanode's successful accessing to mysql server which running on namenode, you should add the hadoop@node-name to user table of mysql database and grant them all privileges.
+
+
