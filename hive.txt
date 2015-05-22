@@ -1,0 +1,20 @@
+1.
+BUG:
+Permission denied: user=anonymous, access=EXECUTE, inode="/tmp":hadoop:supergroup:drwx-wx---
+
+ANA:
+when start the beeline, using 'beeline -u ConnectURL' with anonymous username, the /tmp and /user/hive/warehouse dirs' authority must contain 'w' for other user.
+
+SLN:
+1)change the mode of above two dirs'.
+2)beeline -n hadoop -u ConnectURL.
+
+2.
+BUG:
+SET mapred.job.tracker=local;
+could not work.
+
+SLN:
+1)not tested:modify the hive-site.xml directly.
+
+
