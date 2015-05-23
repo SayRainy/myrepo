@@ -1,0 +1,2 @@
+1. environment variables' export and unset
+after comment some variables in ~/.bashrc, you should source the ~/.bashrc or unset them on manul.

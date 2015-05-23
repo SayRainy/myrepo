@@ -1,0 +1,5 @@
+1. configuration
+1)extract  the bin.tar.gz and install mahout with environment variables setting.
+
+2)modify the ${MAHOUT_HOME}/bin/mahout script by adding MAHOUT_HEAP_SIZE to avoid failure when starts mahout with default size which is 4g.like below.
+MAHOUT_HEAP_SIZE=1000
