@@ -33,4 +33,14 @@ append this entry to yarn-site.xml
 5. HMaster shutdown when execute start-hbase.sh cmd
 ZooKeeper architecture is 1+x, which means 1 HMaster plus x>=2*n + 1(n is the broken machine number.)
 thus the tolerance of the cluter is n. 
-e.g.  1+4 cluster only can brokendown 1 node or being shutdown.
+e.g.  1+4 cluster only can have 1 brokendown  node or been shutdown.
+
+6. `hadoop jar` cmd failed.
+Bug: 
+Hadoop jar my_first_mapred_fat.jar  <main_class>
+-Dwordcount.case.sensitive=false 
+hdfs://namenode:9000/input/wordcount_test_input hdfs://namenode:9000/output/wordcount_test_output 
+-skip hdfs://namenode:9000/input/patterns/patterns.txt
+
+Sln:
+如果指定<main_class>则无法正确解析通用参数与特定参数。可通过导出该jar包时指定MainClass。
