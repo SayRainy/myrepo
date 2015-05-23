@@ -1,0 +1,87 @@
+策略：
+1. 安装、配置hostname主机，然后通过VM克隆出多台datanode，设置hostname与datanode的网络以及主机名，在hostname中配置/etc/hosts的本地DNS，然后通过无加密的SSH拷贝到各台datanode。
+
+caution:
+Typically you choose one machine in the cluster to act as the NameNode and one machine as to act as the ResourceManager, exclusively. 
+The rest of the machines act as both a DataNode and NodeManager and are referred to as slaves
+
+线性扩展集群，需修改文件:hosts, hostname, internet, slaves, hbase:hbase-site.xml->hbase.zookeeper.quorum;regionservers ,zookeeper:conf/zoo.cfg
+
+1、SSH安装
+$which ssh
+$sudo apt-get install openssh-server
+
+2、JDK安装
+$java -version
+参考
+http://blog.csdn.net/shines/article/details/36780643
+
+
+3、更改hosts
+$sudo gedit /etc/hosts
+
+# hadoop env
+192.168.0.100 namenode
+192.168.0.101 data1
+192.168.0.101 data2
+
+
+4、建立Hadoop账户并切换到Hadoop账户
+$sudo addgroup hadoop
+$sudo adduser -ingroup hadoop hadoop
+$:14641
+或者直接
+$sudo useradd hadoop
+$:14641
+
+更改权限
+$sudo gedit /etc/sudoers
+hadoop ALL=(ALL:ALL)ALL
+
+5、登录到hadoop并配置SSH
+$mkdir .ssh
+$chmod 755 .ssh
+$ssh-keygen -t rsa
+$cd ~/.ssh
+$cp id_rsa.pub authorized_keys
+$chmod 644 authorized_keys
+
+6、参考apache各模块的官方网站，配置Hadoop集群中各模块的conf/*-site.xml
+
+7、Eclipse配置Hadoop插件
+下载自行编译Hadoop-Eclipse-plugins，
+https://github.com/winghc/hadoop2x-eclipse-plugin
+详见
+http://blog.csdn.net/ggz631047367/article/details/42497557
+注意：Hadoop Location设置时主机应设置成namenode
+
+8、Eclipse开发HBase
+1）建立Map/Reduce工程->修改工程属性->Library->Add Extern Jars:根据情况，添加/home/hadoop/hbase-0.98.9-hadoop2/lib下的HBase Jar。
+2）HBase src是单独的下载包，使用方法可同Hadoop src。
+
+9、ZooKeeper安装与启动，为每台机器配置如下
+1）稳定版下载3.4.6
+2）解压至/home/hadoop
+3)设置环境变量，~/.bashrc
+export ZOOKEEPER_INSTALL=/home/hadoop/zookeeper-3.4.6
+export PATH=$PATH:$ZOOKEEPER_INSTALL/bin
+4）设置conf/zoo.cfg
+复制zoo_sample.cfg为zoo.cfg
+添加：
+server.1=namenode:2888:3888
+server.2=data1:2888:3888
+server.3=data2:2888:3888
+5)创建文件myid, dataDir=/home/hadoop/zookeeper-3.4.6/tmp
+写入server编号1,2,3：
+1
+6）启动ZooKeeper server for every node by hand.，启动时注意各节点的时间需一致。
+$zkServer.sh start
+7)测试本地客户端连接，输入help，获得命令帮助
+$echo ruok | localhost 2181//server回应imok
+连接server：
+$zkCli.sh -server namenode:2181
+8)关闭ZooKeeper server
+$zkServer.sh stop
+
+
+

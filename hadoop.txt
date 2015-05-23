@@ -44,3 +44,25 @@ hdfs://namenode:9000/input/wordcount_test_input hdfs://namenode:9000/output/word
 
 Sln:
 如果指定<main_class>则无法正确解析通用参数与特定参数。可通过导出该jar包时指定MainClass。
+
+7. HDFS默认存储配置文件路径tmp重启时会自动删除
+
+sln1:每次使用Hadoop之前，格式化namenode
+
+sln2:修改各节点的core-site.xml
+
+
+
+<property>
+
+    <name>hadoop.tmp.dir</name>
+
+    <value>/home/hadoop/hadoop-2.6.0/tmp</value>
+
+    <description>A base for other temporary directories.</description>
+
+</property>
+
+//自行创建tmp目录:your dir
+
+
