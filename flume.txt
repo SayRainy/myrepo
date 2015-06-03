@@ -1,0 +1,2 @@
+1 create directories according to what is defined in flume-conf.properties.*.
+e.g. when the source is spooldir and the sink is hdfs, you should build corresponding dirs both in local filesystem and hdfs.
