@@ -1,8 +1,9 @@
 1. clean and fix the hadoop cluster throughly.
 1)delete files recursively under HADOOP_INSTALL_DIR/[logs] [tmp] for each node.
 2)delete files recursively under HBASE_INSTALL_DIR/logs for each node.
-3)execute cmd 'hdfs namenode -format' in namenode.
-4)before starting the cluster, check and unify the NTP of the cluster.
+3)delete persistent dir which hbase.zookeeper.property.dataDir defined in hbase-site.xml.
+4)execute cmd 'hdfs namenode -format' in namenode.
+5)before starting the cluster, check and unify the NTP of the cluster.
 note: make sure that the time difference between datanode and namenode must be less than 30000ms default.
 
 2. WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
